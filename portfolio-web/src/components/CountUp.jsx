@@ -58,5 +58,8 @@ export default function CountUp({ value, duration = 1600 }) {
     }
   }, [safeTarget, duration])
 
-  return <span ref={ref}>{display.toLocaleString()}</span>
+  // No thousands separator on purpose. The numbers on this site are
+  // counts, percentages, and years, and a year must never be grouped
+  // as "2,027".
+  return <span ref={ref}>{display}</span>
 }
