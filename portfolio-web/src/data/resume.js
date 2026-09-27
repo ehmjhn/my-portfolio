@@ -36,7 +36,7 @@ export const profile = {
   // The ?. is a safety net, so this file also works outside Vite
   // (for example when a script imports it directly).
   github: import.meta.env?.VITE_GITHUB_URL || 'https://github.com/ehmjhn',
-  linkedin: import.meta.env?.VITE_LINKEDIN_URL || 'https://www.linkedin.com/',
+  linkedin: import.meta.env?.VITE_LINKEDIN_URL || 'https://www.linkedin.com/in/jhon-emmanuele-alcañices-378934377',
 }
 
 // Short answers the terminal can give. Keep them short, they get
