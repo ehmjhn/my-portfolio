@@ -1,0 +1,441 @@
+/* ==========================================================
+   1. THEME SYSTEM
+   ==========================================================
+   Every colour on this site comes from the variables below.
+   Switching themes means changing the values of these
+   variables and nothing else, which is why all four themes
+   only need about fifteen lines each.
+
+   The class sits on <html>, added by SettingsContext:
+       <html class="theme-midnight">
+       <html class="theme-neon">
+   ========================================================== */
+
+/* ---------- 1a. MIDNIGHT (the default) ---------- */
+:root,
+.theme-midnight {
+  /* the four accent colours used across the site */
+  --c-cyan: #22d3ee;
+  --c-violet: #a78bfa;
+  --c-pink: #f472b6;
+  --c-green: #34d399;
+
+  /* surfaces */
+  --bg: #05070f;
+  --bg-2: #090d1a;
+  --bg-glass: rgba(255, 255, 255, 0.045);
+  --card: rgba(255, 255, 255, 0.04);
+  --card-hover: rgba(255, 255, 255, 0.075);
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.18);
+
+  /* text */
+  --text: #e9edf7;
+  --muted: #97a1b8;
+  --faint: #5c6781;
+
+  /* effects */
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.65);
+  --blur: 18px;
+
+  /* the ambient glow colour behind the page */
+  --glow-a: rgba(34, 211, 238, 0.16);
+  --glow-b: rgba(167, 139, 250, 0.16);
+  --glow-c: rgba(244, 114, 182, 0.12);
+
+  color-scheme: dark;
+}
+
+/* ---------- 1b. DAYLIGHT (the light theme) ---------- */
+.theme-daylight {
+  --c-cyan: #0891b2;
+  --c-violet: #7c3aed;
+  --c-pink: #db2777;
+  --c-green: #059669;
+
+  --bg: #f4f7fd;
+  --bg-2: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.75);
+  --card: rgba(255, 255, 255, 0.78);
+  --card-hover: rgba(255, 255, 255, 0.95);
+  --line: rgba(15, 23, 42, 0.1);
+  --line-strong: rgba(15, 23, 42, 0.18);
+
+  --text: #0d1424;
+  --muted: #4b5871;
+  --faint: #8894ab;
+
+  --shadow: 0 14px 36px rgba(15, 23, 42, 0.1);
+  --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.14);
+  --blur: 16px;
+
+  /* glows are much softer in light mode, or the page looks blurry */
+  --glow-a: rgba(8, 145, 178, 0.14);
+  --glow-b: rgba(124, 58, 237, 0.12);
+  --glow-c: rgba(219, 39, 119, 0.1);
+
+  color-scheme: light;
+}
+
+/* ---------- 1c. NEON NOIR (dark, heavy glow) ---------- */
+.theme-neon {
+  --c-cyan: #00f0ff;
+  --c-violet: #b14bff;
+  --c-pink: #ff2d95;
+  --c-green: #00ffa3;
+
+  --bg: #0a0413;
+  --bg-2: #12071f;
+  --bg-glass: rgba(255, 255, 255, 0.05);
+  --card: rgba(255, 255, 255, 0.04);
+  --card-hover: rgba(255, 255, 255, 0.09);
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.22);
+
+  --text: #f6ecff;
+  --muted: #b295cc;
+  --faint: #6d5490;
+
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 30px 90px rgba(0, 0, 0, 0.75);
+  --blur: 20px;
+
+  /* brighter glows, this is the point of this theme */
+  --glow-a: rgba(255, 45, 149, 0.2);
+  --glow-b: rgba(0, 240, 255, 0.18);
+  --glow-c: rgba(177, 75, 255, 0.2);
+
+  color-scheme: dark;
+}
+
+/* ---------- 1d. SOLAR (light, warm) ---------- */
+.theme-solar {
+  --c-cyan: #0e7490;
+  --c-violet: #b45309;
+  --c-pink: #c2410c;
+  --c-green: #4d7c0f;
+
+  --bg: #fdf6ec;
+  --bg-2: #fffbf5;
+  --bg-glass: rgba(255, 255, 255, 0.8);
+  --card: rgba(255, 255, 255, 0.72);
+  --card-hover: rgba(255, 255, 255, 0.95);
+  --line: rgba(87, 55, 20, 0.13);
+  --line-strong: rgba(87, 55, 20, 0.22);
+
+  --text: #2b1c0c;
+  --muted: #6b5236;
+  --faint: #9c8666;
+
+  --shadow: 0 14px 34px rgba(120, 80, 30, 0.12);
+  --shadow-lg: 0 26px 60px rgba(120, 80, 30, 0.16);
+  --blur: 14px;
+
+  --glow-a: rgba(217, 119, 6, 0.16);
+  --glow-b: rgba(180, 83, 9, 0.12);
+  --glow-c: rgba(13, 148, 136, 0.12);
+
+  color-scheme: light;
+}
+
+/* ==========================================================
+   2. SHARED LAYOUT VARIABLES
+   ========================================================== */
+:root {
+  --radius: 18px;
+  --radius-sm: 11px;
+  --max: 1160px;
+  --nav-h: 70px;
+
+  /* the font stacks. System fonts, so nothing has to download. */
+  --font: 'Segoe UI', Inter, system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', 'Cascadia Code', Consolas, 'SF Mono', monospace;
+
+  /* how long animations take. Keeping it in a variable means
+     every animation on the site can be slowed at once. */
+  --fast: 0.18s;
+  --normal: 0.32s;
+  --slow: 0.6s;
+}
+
+/* ==========================================================
+   3. RESET
+   ==========================================================
+   Small list of rules that make browsers behave the same.
+   ========================================================== */
+* {
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* stops the top of a section from hiding under the navbar */
+  scroll-padding-top: calc(var(--nav-h) + 20px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* the theme swap fades instead of snapping */
+  transition: background var(--normal) ease, color var(--normal) ease;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+  line-height: 1.18;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+img, svg { max-width: 100%; display: block; }
+button { font: inherit; color: inherit; cursor: pointer; }
+code, kbd, pre { font-family: var(--mono); }
+strong, b { font-weight: 700; }
+
+/* Anything you can tab to gets a clear, on-brand focus ring.
+   We never remove it without replacing it, because it is how
+   keyboard and screen reader users know where they are. */
+:focus-visible {
+  outline: 2px solid var(--c-cyan);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--c-cyan);
+  color: var(--bg);
+}
+
+/* ==========================================================
+   4. THE BACKGROUND
+   ==========================================================
+   Three fixed layers sitting behind everything:
+     - soft coloured glows that slowly drift
+     - a faint grid, for the "tech" look
+     - a very subtle scanline, for the cyber feel
+   They are all pointer-events:none, so you can still click
+   through them no matter what is on top.
+   ========================================================== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: -20%;
+  z-index: -3;
+  background:
+    radial-gradient(760px 480px at 12% 8%, var(--glow-a), transparent 60%),
+    radial-gradient(700px 460px at 88% 22%, var(--glow-b), transparent 60%),
+    radial-gradient(760px 520px at 50% 100%, var(--glow-c), transparent 60%);
+  filter: blur(20px);
+  pointer-events: none;
+  /* the glows drift, very slowly, over 30 seconds */
+  animation: drift 30s ease-in-out infinite alternate;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 62px 62px;
+
+  /* the mask fades the grid out toward the bottom, so it does
+     not fight with the content */
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 100%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+@keyframes drift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(-3%, 2%, 0) scale(1.08); }
+}
+
+/* ==========================================================
+   5. SHARED UTILITIES
+   ========================================================== */
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.sec {
+  padding: 100px 0;
+  position: relative;
+}
+
+/* A tighter section, for when two blocks follow each other */
+.sec-tight {
+  padding: 68px 0;
+}
+
+section { position: relative; }
+
+/* The gradient text used in headings */
+.grad {
+  background: linear-gradient(100deg, var(--c-cyan), var(--c-violet) 55%, var(--c-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- the small label above a heading ---------- */
+.sec-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-cyan);
+  margin-bottom: 14px;
+}
+
+/* A small dash in front of the tag */
+.sec-tag::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.sec-head {
+  max-width: 660px;
+  margin-bottom: 46px;
+}
+
+.sec-title {
+  font-size: clamp(1.9rem, 4.2vw, 2.85rem);
+  margin-bottom: 14px;
+}
+
+.sec-sub {
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.center-cta {
+  text-align: center;
+  margin-top: 44px;
+}
+
+.empty-note {
+  text-align: center;
+  color: var(--muted);
+  padding: 50px 0;
+  font-size: 0.95rem;
+}
+
+/* ==========================================================
+   6. REVEAL ANIMATION
+   ==========================================================
+   .reveal starts invisible and slightly lower. The Reveal
+   component adds .show when the element scrolls into view,
+   which slides it into place.
+   ========================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity var(--slow) cubic-bezier(0.22, 1, 0.36, 1),
+    transform var(--slow) cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================
+   7. ACCESSIBILITY / MOTION SWITCHES
+   ==========================================================
+   Two separate things turn motion off:
+
+     .no-motion   -> the user pressed "m", or their OS asked
+                     for reduced motion
+     @media       -> the fallback for browsers with the
+                     prefers-reduced-motion setting
+
+   Both do the same job, which is a good pattern: work for
+   people who set the OS option, and for people using our own
+   in-page toggle.
+   ========================================================== */
+.no-motion *,
+.no-motion *::before,
+.no-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+.no-motion .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ==========================================================
+   8. SCROLLBAR
+   ========================================================== */
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 99px;
+  border: 3px solid var(--bg-2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-cyan);
+}
+
+/* Firefox uses different pseudo elements for the scrollbar */
+* {
+  scrollbar-color: var(--line-strong) var(--bg-2);
+  scrollbar-width: thin;
+}

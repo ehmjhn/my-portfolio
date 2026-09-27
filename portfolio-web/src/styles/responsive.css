@@ -1,0 +1,363 @@
+/* ==========================================================
+   RESPONSIVE
+   Everything above assumes a wide screen. These rules undo
+   that in stages.
+
+   The breakpoints are:
+
+     1100px  the point where the two column layouts get tight
+      900px  the point where the navbar links stop fitting
+      720px  the point where multi column grids become one
+      520px  phones, where padding and type need shrinking
+
+   Mobile first thinking in reverse: the desktop layout is the
+   default, and each query removes columns as space runs out.
+   ========================================================== */
+
+/* ==========================================================
+   1100px and below
+   ========================================================== */
+@media (max-width: 1100px) {
+  .proj-grid-full {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .detail-grid {
+    gap: 28px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1.6fr 1fr 1fr;
+  }
+
+  .footer-col:last-child {
+    grid-column: 2 / -1;
+  }
+}
+
+/* ==========================================================
+   900px and below
+   ========================================================== */
+@media (max-width: 900px) {
+  /* The nav links do not fit, so hide them and rely on the
+     burger menu instead. */
+  .nav-links {
+    display: none;
+  }
+
+  .burger {
+    display: grid;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  /* The "Search" label is redundant on a narrow screen, so only
+     the icon and the key hint stay. */
+  .pt-text {
+    display: none;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .hero-visual {
+    min-height: 360px;
+    order: -1; /* the code window sits above the text on mobile */
+  }
+
+  .hero-text {
+    text-align: left;
+  }
+
+  .ring-3 { width: 400px; height: 400px; }
+  .ring-2 { width: 330px; height: 330px; }
+
+  /* ---------- grids drop to two or one column ---------- */
+  .about-grid,
+  .edu-grid,
+  .contact-grid,
+  .detail-grid,
+  .cs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pillar-grid,
+  .proj-grid,
+  .proj-grid-full {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* The sticky column is not sticky on mobile, or it covers the
+     text while you scroll. */
+  .detail-side {
+    position: static;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sheet-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .stack-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
+/* ==========================================================
+   720px and below
+   ========================================================== */
+@media (max-width: 720px) {
+  :root {
+    --nav-h: 64px;
+  }
+
+  .sec {
+    padding: 70px 0;
+  }
+
+  .sec-tight {
+    padding: 50px 0;
+  }
+
+  .wrap {
+    padding: 0 18px;
+  }
+
+  .page-head {
+    padding: 40px 18px 4px;
+  }
+
+  /* Almost everything becomes a single column */
+  .skills-grid,
+  .pillar-grid,
+  .lab-grid,
+  .proj-grid,
+  .proj-grid-full,
+  .stats-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .card,
+  .edu-card,
+  .contact-form,
+  .cs-card {
+    padding: 22px;
+  }
+
+  .term-log {
+    height: 340px;
+    font-size: 0.8rem;
+  }
+
+  /* The previous / next row wraps to a vertical stack */
+  .prev-next {
+    grid-template-columns: 1fr;
+  }
+
+  .pn-right {
+    text-align: left;
+  }
+
+  .heat-stats {
+    gap: 22px;
+  }
+
+  .heat-stats b {
+    font-size: 1.35rem;
+  }
+
+  .heat-card {
+    padding: 20px;
+  }
+
+  .footer-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .footer-col:last-child {
+    grid-column: auto;
+  }
+
+  .footer-bottom {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .sheet {
+    padding: 22px;
+  }
+
+  .sheet-keys {
+    min-width: 100px;
+  }
+
+  /* The palette should use more of the screen on a phone */
+  .palette-backdrop {
+    padding: 6vh 12px 12px;
+  }
+
+  .palette {
+    max-height: 80vh;
+  }
+}
+
+/* ==========================================================
+   520px and below  (phones)
+   ========================================================== */
+@media (max-width: 520px) {
+  .hero {
+    padding: 40px 0 60px;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+  }
+
+  .hero-cta .magnetic-inner {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stat b {
+    font-size: 1.8rem;
+  }
+
+  .code-body {
+    font-size: 0.68rem;
+  }
+
+  .code-line {
+    padding: 0 10px;
+    gap: 8px;
+  }
+
+  .ring-3 { width: 320px; height: 320px; }
+  .ring-2 { width: 270px; height: 270px; }
+  .ring-1 { width: 220px; height: 220px; }
+
+  .hero-visual {
+    min-height: 300px;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .detail-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .info b {
+    font-size: 0.85rem;
+  }
+
+  /* The back to top button moves in, so it does not sit on top
+     of the palette close button. */
+  .to-top {
+    right: 14px;
+    bottom: 14px;
+    width: 42px;
+    height: 42px;
+  }
+
+  .heat-tip-level {
+    display: none;
+  }
+
+  .term-bar {
+    gap: 9px;
+    padding: 10px 12px;
+  }
+
+  .term-title {
+    font-size: 0.7rem;
+  }
+}
+
+/* ==========================================================
+   TOUCH DEVICES
+   The custom cursor and the magnetic pull are mouse-only, so on
+   touch we undo any hover-only movement that would otherwise
+   look like the page is stuck.
+   ========================================================== */
+@media (hover: none) {
+  .card:hover {
+    transform: none;
+  }
+
+  .service:hover,
+  .cert:hover,
+  .tl-item:hover,
+  a.info:hover,
+  .filter-btn:hover,
+  .hero-link:hover,
+  .social:hover,
+  .pn-card:hover {
+    transform: none;
+  }
+
+  /* Project cards hide the "read case study" line until hover, so
+     on touch it has to always be visible. */
+  .proj-cta {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================
+   PRINT
+   If someone prints a page (or saves it as a PDF) the dark
+   background wastes ink, so we switch to a plain light version.
+   ========================================================== */
+@media print {
+  body::before,
+  body::after,
+  .nav,
+  .footer,
+  .progress-track,
+  .to-top,
+  .cur-dot,
+  .cur-ring,
+  .palette-backdrop,
+  .term,
+  .hero-visual {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .card {
+    border: 1px solid #ccc;
+    box-shadow: none;
+    background: #fff;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

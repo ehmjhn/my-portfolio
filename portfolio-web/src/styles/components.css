@@ -1,0 +1,609 @@
+/* ==========================================================
+   COMPONENTS
+   Cards, buttons, pills, forms, and the small pieces used
+   across more than one page.
+   ========================================================== */
+
+/* ==========================================================
+   1. CARDS
+   ==========================================================
+   The glass card. There is a :hover version that lifts and
+   brightens, and every card uses a ::before for the accent
+   line that appears along the top edge on hover.
+   ========================================================== */
+.card {
+  position: relative;
+  padding: 26px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--card);
+  backdrop-filter: blur(var(--blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(140%);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform var(--normal) cubic-bezier(0.22, 1, 0.36, 1),
+    border-color var(--normal) ease, background var(--normal) ease,
+    box-shadow var(--normal) ease;
+}
+
+/* The thin accent bar across the top. It is scaled to zero
+   width normally and grows to full width on hover. */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--c-cyan), var(--c-violet), var(--c-pink));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--normal) cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--line-strong);
+  background: var(--card-hover);
+  box-shadow: var(--shadow-lg);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+/* ==========================================================
+   2. BUTTONS
+   ========================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 24px;
+  border-radius: 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.93rem;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--fast) ease, border-color var(--fast) ease,
+    box-shadow var(--fast) ease, background var(--fast) ease;
+}
+
+.btn:hover {
+  border-color: var(--c-cyan);
+  background: var(--card-hover);
+  box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.1);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-sm {
+  padding: 9px 17px;
+  font-size: 0.85rem;
+  border-radius: 10px;
+}
+
+.btn.full {
+  width: 100%;
+}
+
+/* The filled one. The shine that sweeps across on hover is a
+   ::after that moves left to right. */
+.btn-primary {
+  border-color: transparent;
+  background: linear-gradient(120deg, var(--c-cyan), var(--c-violet));
+  color: #05070f;
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 10px 32px rgba(34, 211, 238, 0.4);
+  background: linear-gradient(120deg, var(--c-cyan), var(--c-pink));
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-20deg);
+}
+
+.btn-primary:hover::after {
+  animation: shine 0.7s ease;
+}
+
+@keyframes shine {
+  to { left: 130%; }
+}
+
+.btn-ghost {
+  background: transparent;
+}
+
+.btn-ghost.on {
+  border-color: var(--c-cyan);
+  color: var(--c-cyan);
+}
+
+.arrow {
+  transition: transform var(--fast) ease;
+}
+
+.btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* ---------- magnetic buttons ----------
+   The inner span is the visible content. The <button> itself is
+   what useMagnetic moves, so the label must be a child. This
+   stops the text from looking blurry while it is being moved. */
+.magnetic {
+  will-change: transform;
+}
+
+.magnetic-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================
+   3. PILLS / TAGS
+   ========================================================== */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px;
+  border-radius: 99px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  color: var(--muted);
+  transition: all var(--fast) ease;
+}
+
+.pill:hover {
+  border-color: var(--c-cyan);
+  color: var(--c-cyan);
+}
+
+.pill-lg {
+  padding: 6px 14px;
+  font-size: 0.79rem;
+}
+
+.pill-more {
+  color: var(--faint);
+}
+
+.pill-live {
+  border-color: var(--c-green);
+  color: var(--c-green);
+}
+
+.pill-live .dot {
+  width: 6px;
+  height: 6px;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.course-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+/* ==========================================================
+   4. THE SMALL ANIMATED DOT
+   ==========================================================
+   A green pulsing dot, used for "available" badges.
+   ========================================================== */
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-green);
+  box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
+  animation: pulseDot 2s infinite;
+  flex-shrink: 0;
+}
+
+/* The ring grows out and fades. That expanding ring is what
+   makes the dot look like it is "broadcasting". */
+@keyframes pulseDot {
+  0%   { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
+  70%  { box-shadow: 0 0 0 9px rgba(52, 211, 153, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+/* ==========================================================
+   5. BADGE (the "available for work" pill)
+   ========================================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px 7px 12px;
+  border-radius: 99px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  font-size: 0.83rem;
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 26px;
+}
+
+/* ==========================================================
+   6. STAT CARDS (the numbers strip)
+   ========================================================== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 62px;
+}
+
+/* Two up, used on the project detail page */
+.stats-2 {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 620px;
+  margin: 40px 0 0;
+}
+
+.stat {
+  text-align: center;
+  padding: 24px 18px;
+}
+
+.stat b {
+  display: block;
+  font-size: 2.1rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 5px;
+}
+
+.stat span {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+
+/* ==========================================================
+   7. CHECK LIST
+   ========================================================== */
+.check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.check-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-size: 0.94rem;
+  color: var(--muted);
+}
+
+.check {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: rgba(52, 211, 153, 0.14);
+  color: var(--c-green);
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-top: 16px;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.feature-list .check {
+  background: rgba(34, 211, 238, 0.14);
+  color: var(--c-cyan);
+}
+
+/* ==========================================================
+   8. FILTER CHIPS
+   ========================================================== */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  border-radius: 99px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all var(--fast) ease;
+}
+
+.filter-btn:hover {
+  border-color: var(--line-strong);
+  color: var(--text);
+  transform: translateY(-2px);
+}
+
+.filter-btn.on {
+  border-color: transparent;
+  background: linear-gradient(120deg, var(--c-cyan), var(--c-violet));
+  color: #05070f;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(34, 211, 238, 0.28);
+}
+
+/* ==========================================================
+   9. FORMS
+   ========================================================== */
+.field {
+  margin-bottom: 18px;
+}
+
+.field label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+}
+
+.field input,
+.field textarea,
+.field-input {
+  width: 100%;
+  padding: 13px 15px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.93rem;
+  resize: vertical;
+  transition: border-color var(--fast) ease, box-shadow var(--fast) ease;
+}
+
+.field input::placeholder,
+.field textarea::placeholder,
+.field-input::placeholder {
+  color: var(--faint);
+}
+
+.field input:focus,
+.field textarea:focus,
+.field-input:focus {
+  outline: none;
+  border-color: var(--c-cyan);
+  box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.12);
+}
+
+.form-msg {
+  margin-top: 16px;
+  padding: 12px 15px;
+  border-radius: 11px;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+
+.form-msg.ok {
+  border-color: rgba(52, 211, 153, 0.4);
+  background: rgba(52, 211, 153, 0.08);
+  color: var(--c-green);
+}
+
+.form-msg.err {
+  border-color: rgba(248, 113, 113, 0.4);
+  background: rgba(248, 113, 113, 0.08);
+  color: #f87171;
+}
+
+.form-privacy {
+  margin-top: 16px;
+  font-size: 0.78rem;
+  color: var(--faint);
+  line-height: 1.55;
+}
+
+/* ---------- the range slider ---------- */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--c-cyan), var(--c-violet));
+  outline: none;
+  margin: 18px 0;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--text);
+  border: 3px solid var(--c-cyan);
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--text);
+  border: 3px solid var(--c-cyan);
+  cursor: pointer;
+}
+
+/* ==========================================================
+   10. KEYBOARD KEY STYLE
+   ==========================================================
+   The little boxes used for shortcuts. Used in the navbar, the
+   palette footer, the shortcut sheet, and the footer.
+   ========================================================== */
+kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  padding: 3px 7px;
+  border-radius: 6px;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  background: var(--bg-2);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.kbd-plus {
+  margin: 0 3px;
+  color: var(--faint);
+  font-size: 0.7rem;
+}
+
+/* ==========================================================
+   11. THE TYPING CURSOR
+   ==========================================================
+   Used by the hero typing animation and the terminal.
+   ========================================================== */
+.typing {
+  display: inline-flex;
+  align-items: center;
+}
+
+.typing .cursor,
+.term-caret,
+.code-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 3px;
+  background: var(--c-cyan);
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+/* ==========================================================
+   12. SMALL SHARED BITS
+   ========================================================== */
+.note-box {
+  margin-top: 24px;
+  padding: 15px 18px;
+  border-radius: 12px;
+  border: 1px dashed var(--line-strong);
+  background: var(--card);
+}
+
+.note-box b {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-violet);
+  margin-bottom: 7px;
+}
+
+.note-box p {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.more-row {
+  text-align: center;
+  margin-top: 44px;
+  padding-top: 30px;
+  border-top: 1px solid var(--line);
+}
+
+.ico {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--c-cyan);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+  border-radius: 8px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.chip-empty {
+  color: var(--faint);
+  font-style: italic;
+}
