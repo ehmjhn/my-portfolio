@@ -290,19 +290,6 @@
   font-family: var(--mono);
 }
 
-/* The strip on the home page. These four numbers are the whole point
-   of the block, so they get the mono face at display size: much
-   bigger, heavier, and tabular so the CountUp animation does not
-   shuffle the card width on every frame. */
-.stats-strip .stat b {
-  font-family: var(--mono);
-  font-size: 3.4rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  font-variant-numeric: tabular-nums;
-  margin-bottom: 8px;
-}
-
 /* ==========================================================
    7. CHECK LIST
    ========================================================== */
