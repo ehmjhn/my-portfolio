@@ -7,6 +7,12 @@ export default function CountUp({ value, duration = 1600 }) {
   const ref = useRef(null)
   const [display, setDisplay] = useState(0)
 
+  // A number is the only thing that can be animated. If a caller
+  // accidentally passes something like "80%", this turns it back
+  // into 80 instead of rendering NaN on screen.
+  const target = Number(value)
+  const safeTarget = Number.isFinite(target) ? target : 0
+
   useEffect(() => {
     const node = ref.current
     if (!node) return
@@ -22,7 +28,7 @@ export default function CountUp({ value, duration = 1600 }) {
         // easeOutExpo makes it slow down nicely at the end
         const eased = percent === 1 ? 1 : 1 - Math.pow(2, -10 * percent)
 
-        setDisplay(Math.round(eased * value))
+        setDisplay(Math.round(eased * safeTarget))
 
         if (percent < 1) frame = requestAnimationFrame(tick)
       }
@@ -31,7 +37,7 @@ export default function CountUp({ value, duration = 1600 }) {
     }
 
     if (!('IntersectionObserver' in window)) {
-      setDisplay(value)
+      setDisplay(safeTarget)
       return
     }
 
@@ -50,7 +56,7 @@ export default function CountUp({ value, duration = 1600 }) {
       observer.disconnect()
       cancelAnimationFrame(frame)
     }
-  }, [value, duration])
+  }, [safeTarget, duration])
 
   return <span ref={ref}>{display.toLocaleString()}</span>
 }

@@ -241,6 +241,11 @@
     font-size: 1.8rem;
   }
 
+  /* the strip keeps the mono face, just di na ganon kalaki */
+  .stats-strip .stat b {
+    font-size: 2.6rem;
+  }
+
   .code-body {
     font-size: 0.68rem;
   }

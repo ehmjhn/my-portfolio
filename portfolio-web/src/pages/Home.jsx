@@ -154,7 +154,7 @@ export default function Home() {
 
         {/* ---------- the numbers strip ---------- */}
         <div className="wrap">
-          <div className="stats">
+          <div className="stats stats-strip">
             {stats.map((stat, i) => (
               <Reveal key={stat.label} delay={i * 90}>
                 <div className="card stat">
