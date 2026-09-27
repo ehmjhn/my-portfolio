@@ -132,7 +132,7 @@ export default function ProjectDetail() {
               <Reveal key={g.label}>
                 <div className="card stat">
                   <b className="grad">
-                    <CountUp value={g.value} />%
+                    <CountUp value={g.value} /> %
                   </b>
                   <span>{g.label}</span>
                 </div>
